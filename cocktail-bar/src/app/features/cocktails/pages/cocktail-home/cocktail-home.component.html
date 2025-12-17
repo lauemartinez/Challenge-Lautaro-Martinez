@@ -1,0 +1,21 @@
+<div>
+  <section id="hero-section" class="hero-section">
+    <img src="" alt="">
+    <div class="hero-content">
+      <h1>Welcome to the Cocktail Bar</h1>
+      <p>Discover a world of cocktails and ingredients!</p>
+    </div>
+  </section>
+  <section id="cocktail-list-section" class="cocktail-list-section">
+    <h2>Cocktail List</h2>
+    <div class="cocktail-cards-container">
+      @for (cocktail of cocktailList(); track cocktail.id) {
+        <app-cocktail-card
+          [cocktail]="cocktail"
+        ></app-cocktail-card>
+      } @empty {
+        There are no items.
+      }
+    </div>
+  </section>
+</div>
