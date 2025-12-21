@@ -28,6 +28,8 @@ body {
     --mat-sys-primary: light-dark(#005cbb, #c3419b);
     --mat-sys-primary-container: light-dark(#d7e3ff, #201f2d);
     --mat-sys-secondary-container: light-dark(#d7e3ff, #48455a);
+    --mat-icon-color: light-dark(#005cbb, #c3419b);
+    --mat-icon-background-color: light-dark(#005cbb, #c3419b4f);
   
     @include mat.checkbox-overrides((
       label-text-size: 1.5rem,

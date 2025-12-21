@@ -6,6 +6,7 @@ export interface Cocktail {
   glass: string;
   instructions: string;
   ingredients: Ingredient[];
+  isFavourite: boolean;
 }
 
 export interface Ingredient {

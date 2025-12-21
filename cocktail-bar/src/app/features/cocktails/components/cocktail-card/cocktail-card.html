@@ -1,8 +1,8 @@
 <div class="card-wrapper" (click)="openDetails()" aria-hidden="true">
   <img src="{{ cocktail().thumbnail }}" alt="{{ cocktail().name }}">
   <div class="image-shadow"></div>
-  @if (isFavorite()) {
-    <mat-icon aria-hidden="false" fontIcon="star" color="primary"></mat-icon>
+  @if (cocktail().isFavourite) {
+    <mat-icon class="highlight-background" aria-hidden="false" fontIcon="star" color="primary"></mat-icon>
   }
   <div class="cocktail-info">
     <span class="cocktail-name">{{ cocktail().name }}</span>
@@ -10,10 +10,10 @@
       <mat-icon aria-hidden="false" fontIcon="more_vert"></mat-icon>
     </button>
     <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="openDetails()">
         View Details <mat-icon aria-hidden="false" fontIcon="arrow_forward_ios"></mat-icon>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item (click)="changeFavourite()">
         Toggle Favourite <mat-icon aria-hidden="false" fontIcon="star"></mat-icon>
       </button>
     </mat-menu>

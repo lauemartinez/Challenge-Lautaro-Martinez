@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Cocktail } from '../../models/cocktail.model';
 import { CommonModule } from '@angular/common';
 import { MATERIAL_IMPORTS } from '../../../../shared/material';
@@ -14,9 +14,13 @@ import { MATERIAL_IMPORTS } from '../../../../shared/material';
 })
 export class CocktailCard {
   cocktail = input.required<Cocktail>();
-  isFavorite = input.required<boolean>();
+  toggleFavourite = output<string>();
 
   openDetails() {
     // Implementation for opening details
+  }
+
+  changeFavourite() {
+    this.toggleFavourite.emit(this.cocktail().id);
   }
 }

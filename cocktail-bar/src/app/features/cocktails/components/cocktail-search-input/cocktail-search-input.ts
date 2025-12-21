@@ -19,6 +19,7 @@ export class CocktailSearchInput {
   ingredientListInput = input.required<string[]>();
 
   filterChange = output<SearchFilter>();
+  favouriteOnlyToggle = output<boolean>();
 
   filterField = signal<SearchField>("name");
   filterValueRaw = signal("");
@@ -84,6 +85,11 @@ export class CocktailSearchInput {
       untracked(() => {
         this.filterValueRaw.set("");
       });
+    });
+
+    effect(() => {
+      const newValue = this.favouriteValue();
+      this.favouriteOnlyToggle.emit(newValue);
     });
   }
 

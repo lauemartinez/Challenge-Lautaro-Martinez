@@ -12,6 +12,7 @@ export function mapApiCocktailToApp(
     glass: dto.strGlass,
     instructions: dto.strInstructions,
     ingredients: extractIngredients(dto),
+    isFavourite: false,
   };
 }
 

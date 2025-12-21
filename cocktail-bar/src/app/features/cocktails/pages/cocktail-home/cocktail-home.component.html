@@ -15,15 +15,16 @@
         [favouriteValueInput]="favouriteValueInput()"
         [ingredientListInput]="ingredientList()"
         (filterChange)="onFilterValueChange($event)"
+        (favouriteOnlyToggle)="onFavouriteOnlyToggle($event)"
       ></app-cocktail-search-input>
     </div>
 
     <div class="cocktail-cards-container">
       @if (!isLoading()) {
-        @for (cocktail of cocktailList(); track cocktail.id) {
+        @for (cocktail of visibleCocktails(); track cocktail.id) {
           <app-cocktail-card
             [cocktail]="cocktail"
-            [isFavorite]="false"
+            (toggleFavourite)="toggleFavourite($event)"
           ></app-cocktail-card>
         } @empty { 
           <div class="not-found-container">
