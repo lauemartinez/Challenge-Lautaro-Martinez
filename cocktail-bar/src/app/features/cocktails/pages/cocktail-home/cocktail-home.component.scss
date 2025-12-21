@@ -19,7 +19,7 @@
   grid-area: hero;
   display: grid;
   grid-template-columns: minmax(1rem, 10%) auto minmax(1rem, 10%);
-  grid-template-rows: auto 5rem;
+  grid-template-rows: auto 15rem;
   align-items: center;
   justify-items: end;
 
@@ -73,7 +73,7 @@
 
 #cocktail-list-section {
   grid-area: content;
-  margin-top: -5rem;
+  margin-top: -15rem;
 
   background-color: var(--mat-sys-primary-container);
   border-radius: var(--mat-sys-corner-medium);
@@ -95,10 +95,11 @@
 
     align-self: center;
     justify-self: center;
-
+    
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(10rem, 1fr) );
     grid-auto-rows: minmax(5rem, auto);
+    justify-items: center;
     gap: 1rem;
   }
 }
@@ -109,6 +110,7 @@
   align-items: center;
   justify-content: center;
   
+  height: 15rem;
   gap: 1rem;
   font-size: 1.5rem;
 
@@ -121,8 +123,8 @@
 }
 
 .loading-container {
+  height: 15rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
 }

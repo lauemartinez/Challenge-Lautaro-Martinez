@@ -9,6 +9,7 @@ import { CocktailApiService } from '../../services/cocktail-api.service';
 import { map } from 'rxjs';
 import { mapApiCocktailToApp } from '../../mappers/cocktail.mapper';
 import { SearchField } from '../../mappers/search-field.mapper';
+import { SearchFilter } from '../../models/search-field.model';
 
 @Component({
   standalone: true,
@@ -29,28 +30,29 @@ export class CocktailHomeComponent {
   protected cocktailList = signal<Cocktail[]>([]);
   protected ingredientList = signal<string[]>([]);
   protected isLoading = signal<boolean>(false);
-  protected filterField: SearchField = 'name';
-  protected filterValue = '';
+  protected filterFieldInput = signal<SearchField>('name');
+  protected filterValueInput = signal<string>('');
+  protected favouriteValueInput = signal<boolean>(false);
 
   constructor() {
     this.cocktailList.set(this.route.snapshot.data['cocktailList']);
     this.ingredientList.set(this.route.snapshot.data['ingredientList']);
   }
 
-  onFilterValueChange(searchValue: string): void {
+  protected onFilterValueChange(payload: SearchFilter): void {
     this.isLoading.set(true);
-    if (!searchValue) {
+    if (!payload.value) {
       this.cocktailList.set(this.route.snapshot.data['cocktailList']);
       this.isLoading.set(false);
     } else {
-      this.filterCocktails(searchValue);
+      this.filterCocktails(payload);
     }
   }
 
-  filterCocktails(searchValue: string ): void {
-    this.searchService.searchByField(this.filterField, searchValue).pipe(
-      map(res => res.drinks ?? []),
-      map(drinks => drinks.map(mapApiCocktailToApp))
+  private filterCocktails(payload: SearchFilter): void {
+    this.searchService.searchByField(payload.field, payload.value).pipe(
+      map(res => res.drinks && Array.isArray(res.drinks) ? res.drinks : []),
+      map(drinks => drinks.map(mapApiCocktailToApp))  
     ).subscribe(cocktails => {
       this.cocktailList.set(cocktails);
       this.isLoading.set(false);

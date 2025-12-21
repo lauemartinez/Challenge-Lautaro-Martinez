@@ -10,16 +10,21 @@
   <section id="cocktail-list-section">
     <div class="cocktail-search-container">
       <app-cocktail-search-input
-        [filterField]="filterField"
-        [filterValue]="filterValue"
-        (filterValueChange)="onFilterValueChange($event)"
+        [filterFieldInput]="filterFieldInput()"
+        [filterValueInput]="filterValueInput()"
+        [favouriteValueInput]="favouriteValueInput()"
+        [ingredientListInput]="ingredientList()"
+        (filterChange)="onFilterValueChange($event)"
       ></app-cocktail-search-input>
     </div>
 
     <div class="cocktail-cards-container">
       @if (!isLoading()) {
         @for (cocktail of cocktailList(); track cocktail.id) {
-          <app-cocktail-card [cocktail]="cocktail"></app-cocktail-card>
+          <app-cocktail-card
+            [cocktail]="cocktail"
+            [isFavorite]="false"
+          ></app-cocktail-card>
         } @empty { 
           <div class="not-found-container">
             <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>

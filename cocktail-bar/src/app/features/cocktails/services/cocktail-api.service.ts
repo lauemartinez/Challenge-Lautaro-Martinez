@@ -17,8 +17,9 @@ export class CocktailApiService {
   }
 
   searchByField(field: SearchField, value: string): Observable<CocktailApiResponse> {
+    const { field: queryField, method } = mapSearchFieldToSlug(field);
     return this.http.get<CocktailApiResponse>(
-      `${this.BASE_URL}/search.php?${mapSearchFieldToSlug(field)}=${encodeURIComponent(value)}`
+      `${this.BASE_URL}/${method}.php?${queryField}=${encodeURIComponent(value)}`
     );
   }
 

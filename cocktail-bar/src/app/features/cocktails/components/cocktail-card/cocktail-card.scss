@@ -1,6 +1,7 @@
 .card-wrapper {
   height: 100%;
   aspect-ratio: 1 / 1;
+  max-width: 20rem;
 
   display: grid;
   grid-template-rows: auto auto;
@@ -40,15 +41,43 @@
     justify-self: end;
   }
   
-  .cocktail-name {
+  .cocktail-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
     margin: 1rem;
 
     grid-column: 1 / 1;
     grid-row: 2 / 3;
     align-self: end;
+    
+    .cocktail-name {
+      font-size: 1rem;
+      font-weight: bold;
+    }
 
-    font-size: 1.5em;
-    font-weight: bold;
+    .cocktail-menu-button {
+      height: 1rem;
+      width: 1rem;
+      min-width: fit-content;
+      min-height: fit-content;
+      margin: -0.5rem;
+      padding: 0;
+      color: var(--mat-sys-on-surface);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .card-wrapper {
+    max-width: 16rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .card-wrapper {
+    max-width: 14rem;
   }
 }
 
