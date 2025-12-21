@@ -1,0 +1,30 @@
+<div class="cocktail-search-container">
+  <form class="search-form">
+    <div class="cocktail-search-title">
+      <span class="inline-search-text"> Cocktails recipes by </span>
+      <span class="inline-input-wrapper">
+        <input
+          type="text"
+          [formControl]="filterFieldControl"
+          [matAutocomplete]="auto"
+          class="inline-text-input"
+        />
+        <mat-icon aria-hidden="false" fontIcon="keyboard_arrow_down"></mat-icon>
+      </span>
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (filter of filterOptions; track filter) {
+        <mat-option [value]="filter.slug">{{ filter.name }}</mat-option>
+        }
+      </mat-autocomplete>
+    </div>
+
+    <div>
+      <mat-checkbox [labelPosition]="'before'" (change)="onFavouriteChange($event)">Favourites Only</mat-checkbox>
+    </div>
+  </form>
+
+  <mat-form-field appearance="fill" class="full-width-input">
+    <input matInput placeholder="Search" [formControl]="filterValueControl" />
+    <mat-icon aria-hidden="false" fontIcon="search" matPrefix></mat-icon>
+  </mat-form-field>
+</div>

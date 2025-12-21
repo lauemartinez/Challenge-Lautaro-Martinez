@@ -1,20 +1,35 @@
-<div>
-  <section id="hero-section" class="hero-section">
-    <img src="" alt="">
+<div class="cocktail-home-container">
+  <section id="hero-section">
+    <img src="assets/img/cocktail_bar_hero.jpg" alt="Cocktail bar hero" />
+    <div class="background-shadow"></div>
     <div class="hero-content">
-      <h1>Welcome to the Cocktail Bar</h1>
+      <h1>Cocktail Bar</h1>
       <p>Discover a world of cocktails and ingredients!</p>
     </div>
   </section>
-  <section id="cocktail-list-section" class="cocktail-list-section">
-    <h2>Cocktail List</h2>
+  <section id="cocktail-list-section">
+    <div class="cocktail-search-container">
+      <app-cocktail-search-input
+        [filterField]="filterField"
+        [filterValue]="filterValue"
+        (filterValueChange)="onFilterValueChange($event)"
+      ></app-cocktail-search-input>
+    </div>
+
     <div class="cocktail-cards-container">
-      @for (cocktail of cocktailList(); track cocktail.id) {
-        <app-cocktail-card
-          [cocktail]="cocktail"
-        ></app-cocktail-card>
-      } @empty {
-        There are no items.
+      @if (!isLoading()) {
+        @for (cocktail of cocktailList(); track cocktail.id) {
+          <app-cocktail-card [cocktail]="cocktail"></app-cocktail-card>
+        } @empty { 
+          <div class="not-found-container">
+            <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
+            No cocktails found. Try a different search! 
+          </div>
+        }
+      } @else {
+        <div class="loading-container">
+          <mat-spinner></mat-spinner>
+        </div>
       }
     </div>
   </section>

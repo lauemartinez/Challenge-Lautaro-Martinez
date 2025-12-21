@@ -8,7 +8,6 @@ export function mapApiCocktailToApp(
     id: dto.idDrink,
     name: dto.strDrink,
     thumbnail: dto.strDrinkThumb,
-    category: dto.strCategory,
     alcoholic: dto.strAlcoholic,
     glass: dto.strGlass,
     instructions: dto.strInstructions,

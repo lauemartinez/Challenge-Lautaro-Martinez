@@ -1,0 +1,58 @@
+.card-wrapper {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+  grid-template-rows: auto auto;
+
+  background-color: var(--mat-sys-shadow);
+  border-radius: var(--mat-sys-corner-medium);
+  color: var(--mat-sys-on-shadow);
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    grid-column: 1 / 1;
+    grid-row: 1 / 3;
+
+    border-radius: var(--mat-sys-corner-medium);
+  }
+
+  .image-shadow {
+    width: 100%;
+    height: 100%;
+
+    grid-column: 1 / 1;
+    grid-row: 1 / 3;
+
+    background: linear-gradient(0deg, var(--mat-sys-shadow) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: var(--mat-sys-corner-medium);
+  }
+
+  .mat-icon {
+    grid-column: 1 / 1;
+    grid-row: 1 / 2;
+    align-self: start;
+
+    margin: 0.5rem;
+    justify-self: end;
+  }
+  
+  .cocktail-name {
+    margin: 1rem;
+
+    grid-column: 1 / 1;
+    grid-row: 2 / 3;
+    align-self: end;
+
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+}
+
+.card-wrapper:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s;
+}

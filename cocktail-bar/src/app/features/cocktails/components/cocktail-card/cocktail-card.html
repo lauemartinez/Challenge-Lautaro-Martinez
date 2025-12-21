@@ -1,1 +1,6 @@
-<p>cocktail-card works!</p>
+<div class="card-wrapper">
+  <img src="{{ cocktail().thumbnail }}" alt="{{ cocktail().name }}">
+  <div class="image-shadow"></div>
+  <mat-icon aria-hidden="false"fontIcon="star"></mat-icon>
+  <div class="cocktail-name">{{ cocktail().name }}</div>
+</div>
