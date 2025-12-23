@@ -1,1 +1,13 @@
-<router-outlet />
+<div class="cocktail-home-container">
+  <section id="hero-section">
+    <img src="assets/img/cocktail_bar_hero.jpg" alt="Cocktail bar hero" />
+    <div class="background-shadow"></div>
+    @if (isHome) {
+    <div class="hero-content">
+      <h1>Cocktail Bar</h1>
+      <p>Discover a world of cocktails and ingredients!</p>
+    </div>
+    }
+  </section>
+  <router-outlet />
+</div>

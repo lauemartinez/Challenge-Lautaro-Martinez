@@ -13,20 +13,20 @@ import { SearchField } from "../../mappers/search-field.mapper";
   styleUrl: "./cocktail-search-input.scss",
 })
 export class CocktailSearchInput {
-  filterFieldInput = input.required<SearchField>();
-  filterValueInput = input.required<string>();
-  favouriteValueInput = input.required<boolean>();
-  ingredientListInput = input.required<string[]>();
+  public filterFieldInput = input.required<SearchField>();
+  public filterValueInput = input.required<string>();
+  public favouriteValueInput = input.required<boolean>();
+  public ingredientListInput = input.required<string[]>();
 
-  filterChange = output<SearchFilter>();
-  favouriteOnlyToggle = output<boolean>();
+  public filterChange = output<SearchFilter>();
+  public favouriteOnlyToggle = output<boolean>();
 
-  filterField = signal<SearchField>("name");
-  filterValueRaw = signal("");
-  filterValue = signal("");
-  favouriteValue = signal(false);
+  protected filterField = signal<SearchField>("name");
+  protected filterValueRaw = signal("");
+  protected filterValue = signal("");
+  protected favouriteValue = signal(false);
 
-  inputType = computed<"text" | "number">(() => {
+  protected inputType = computed<"text" | "number">(() => {
     switch (this.filterField()) {
       case "id":
         return "number";
@@ -67,20 +67,20 @@ export class CocktailSearchInput {
 
     effect(() => {
       const payload: SearchFilter = {
-        field: this.filterField(),
+        field: untracked(() => this.filterField()),
         value: this.filterValue(),
-        favourite: this.favouriteValue(),
       };
 
-      localStorage.setItem(this.STORAGE_FILTER_FIELD_KEY, payload.field ?? "");
       localStorage.setItem(this.STORAGE_FILTER_VALUE_KEY, payload.value ?? "");
-      localStorage.setItem(this.STORAGE_FAVOURITE_FIELD_KEY, payload.favourite.toString());
 
       this.filterChange.emit(payload);
     });
 
     effect(() => {
-      this.filterField();
+      localStorage.setItem(
+        this.STORAGE_FILTER_FIELD_KEY,
+        this.filterField() ?? ""
+      );
 
       untracked(() => {
         this.filterValueRaw.set("");
@@ -103,5 +103,9 @@ export class CocktailSearchInput {
 
   protected onFavouriteChange(event: MatCheckboxChange): void {
     this.favouriteValue.set(event.checked);
+    localStorage.setItem(
+      this.STORAGE_FAVOURITE_FIELD_KEY,
+      event.checked.toString()
+    );
   }
 }

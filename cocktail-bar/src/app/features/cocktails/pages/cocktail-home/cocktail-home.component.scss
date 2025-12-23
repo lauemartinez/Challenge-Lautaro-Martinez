@@ -1,79 +1,12 @@
-// Main container
-
-.cocktail-home-container {
-  display: grid;
-
-  grid-template-areas:
-    "hero hero hero"
-    ". content ."
-    ". . .";
-  grid-template-columns:
-    minmax(1rem, 1fr) min(80%, 70rem) minmax(1rem, 1fr);
-  grid-template-rows: 35rem auto 3rem;
-  gap: 1rem;
-}
-
-// Hero section
-
-#hero-section {
-  grid-area: hero;
-  display: grid;
-  grid-template-columns: minmax(1rem, 10%) auto minmax(1rem, 10%);
-  grid-template-rows: auto 15rem;
-  align-items: center;
-  justify-items: end;
-
-  img {
-    grid-column: 1 / 4;
-    grid-row: 1 / 3;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    overflow: hidden;
-  }
-
-  .background-shadow {
-    grid-column: 1 / 4;
-    grid-row: 1 / 3;
-
-    width: 100%;
-    height: 100%;
-
-    background: linear-gradient(
-      0deg,
-      var(--mat-sys-background) 0%,
-      rgba(255, 255, 255, 0) 100%);
-  }
-
-  .hero-content {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    
-    color: var(--mat-sys-on-background);
-    text-align: right;
-
-    h1 {
-      line-height: 1;
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      text-shadow: .1rem .1rem .25rem var(--mat-sys-shadow);
-    }
-
-    p {
-      font-size: 1.25rem;
-      margin: 0;
-      text-shadow: .1rem .1rem .25rem var(--mat-sys-shadow);
-    }
-  }
+:host {
+  display: contents;
 }
 
 // Content section
 
 #cocktail-list-section {
-  grid-area: content;
-  margin-top: -15rem;
+  grid-row: 3 / 5;
+  grid-column: 2 / 3;
 
   background-color: var(--mat-sys-primary-container);
   border-radius: var(--mat-sys-corner-medium);

@@ -1,0 +1,217 @@
+:host {
+  display: contents;
+}
+
+// Details section
+
+.cocktail-details-section {
+  display: grid;
+
+  .details-panel {
+    background-color: var(--mat-sys-primary-container);
+    border-radius: var(--mat-sys-corner-medium);
+  }
+
+  .details-content-wrapper {
+    display: grid;
+    .name-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+      font-size: 2rem;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .instructions-wrapper {
+      display: flex;
+      overflow-y: auto;
+      justify-content: center;
+
+      text-align: center;
+      font-style: italic;
+      font-size: 1rem;
+    }
+  }
+
+  .ingredient-panel {
+    background-color: var(--mat-sys-surface-variant);
+    border-radius: var(--mat-sys-corner-medium);
+  }
+
+  .ingredients-content-wrapper {
+    padding: 1rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: center;
+    gap: 1rem;
+
+    .ingredient-card {
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: column;
+      align-items: center;
+
+      .ingredient-measure {
+        font-size: 1.5rem;
+        color: var(--mat-sys-primary);
+      }
+
+      .ingredient-name {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .image-wrapper {
+    display: flex;
+    justify-content: center;
+    img {
+      aspect-ratio: 1 / 1;
+      margin-top: auto;
+      border-radius: var(--mat-sys-corner-medium);
+    }
+  }
+
+  .action-buttons-wrapper {
+    grid-row: 1;
+    
+    position: absolute;
+    margin-top: 1rem;
+
+    display: flex;
+    justify-self: end;
+    align-items: center;
+    gap: 0.5rem;
+
+    .mat-primary {
+      background-color: var(--mat-sys-primary);
+      .mat-icon {
+        color: var(--mat-sys-on-surface);
+      }
+    }
+  }
+}
+
+@media (min-width: 840px) {
+  .cocktail-details-section {
+    grid-row: 2 / 5;
+    grid-column: 2 / 3;
+
+    grid-template-columns: 1fr 10fr 2fr 1fr 3fr;
+    grid-template-rows: minmax(5rem, 0.5fr) 2fr min-content min-content;
+    margin: auto;
+
+    .details-panel {
+      grid-column: 1 / 5;
+      grid-row: 1 / 4;
+    }
+
+    .details-content-wrapper {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+
+      grid-template-columns: 0.5fr 3fr 0.1fr;
+      grid-template-rows: 0.5fr 1fr 3fr 0.5fr;
+
+      .name-wrapper {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+      }
+
+      .instructions-wrapper {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+      }
+    }
+
+    .ingredient-panel {
+      grid-column: 2 / 4;
+      grid-row: 3 / 5;
+    }
+
+    .ingredients-content-wrapper {
+      grid-column: 2 / 3;
+      grid-row: 3 / 5;
+    }
+
+    .image-wrapper {
+      grid-column: 3 / 6;
+      grid-row: 2 / 4;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .action-buttons-wrapper {
+      grid-column: 5 / 6;
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+@media (max-width: 839px) {
+  .cocktail-details-section {
+    grid-row: 1 / -1;
+    grid-column: 1 / -1;
+
+    padding: 1rem;
+    max-width: 40rem;
+
+    align-self: center;
+    justify-self: center;
+
+    grid-template-columns: minmax(2rem, 1fr) auto minmax(2rem, 1fr);
+    grid-template-rows: 12rem 3rem auto min-content min-content;
+  }
+
+  .image-wrapper {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    img {
+      height: 100%;
+      max-width: 20rem;
+    }
+  }
+
+  .details-panel {
+    min-height: 18rem;
+    grid-column: 1 / 4;
+    grid-row: 2 / 5;
+  }
+
+  .details-content-wrapper {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+
+    grid-template-columns: 0.25fr 3fr 0.25fr;
+    grid-template-rows: 1rem min-content auto 1rem;
+
+    .name-wrapper {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+    }
+    .instructions-wrapper {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+  }
+
+  .ingredient-panel,
+  .ingredients-content-wrapper {
+    grid-column: 2 / 3;
+    grid-row: 4 / 6;
+  }
+
+  .action-buttons-wrapper {
+    grid-column: 3 / 4;
+    flex-direction: column;
+  }
+}

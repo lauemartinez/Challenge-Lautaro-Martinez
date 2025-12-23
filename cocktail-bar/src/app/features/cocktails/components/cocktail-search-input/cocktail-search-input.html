@@ -46,6 +46,7 @@
       [type]="inputType()"
       (input)="onFilterValueChange($any($event.target).value)"
       [matAutocomplete]="ingredients"
+      maxlength="50"
     />
     <mat-icon matPrefix fontIcon="search"></mat-icon>
   </mat-form-field>

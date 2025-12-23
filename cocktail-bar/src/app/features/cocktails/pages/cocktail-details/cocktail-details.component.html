@@ -1,0 +1,40 @@
+<section id="cocktail-details-section" class="cocktail-details-section">
+  <div class="details-panel"></div>
+  <div class="details-content-wrapper">
+    <h2 class="name-wrapper">
+      {{ cocktail().name }}
+    </h2>
+    <p class="instructions-wrapper">
+      {{ cocktail().instructions }}
+    </p>
+  </div>
+  <div class="ingredient-panel"></div>
+  <div class="ingredients-content-wrapper">
+    @for (ingredient of cocktail().ingredients; track $index) {
+      <div class="ingredient-card">
+        <div class="ingredient-measure">{{ ingredient.measure }}</div>
+        <div class="ingredient-name">{{ ingredient.name }}</div>
+      </div>
+    }
+  </div>
+  <div class="image-wrapper">
+    <img [src]="cocktail().thumbnail" [alt]="cocktail().name" />
+  </div>
+  <div class="action-buttons-wrapper">
+    <button 
+      mat-fab
+      aria-label="Return to Home"
+      (click)="returnHome()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button 
+      mat-mini-fab
+      aria-label="Toggle Favourite"
+      (click)="toggleFavourite()"
+      [color]="favouriteStyles().color"
+    >
+      <mat-icon>{{ favouriteStyles().icon }}</mat-icon>
+    </button>
+  </div>
+</section>

@@ -28,4 +28,10 @@ export class CocktailApiService {
       `${this.BASE_URL}/list.php?i=list`
     );
   }
+
+  getCocktailDetails(id: string): Observable<CocktailApiResponse> {
+    return this.http.get<CocktailApiResponse>(
+      `${this.BASE_URL}/lookup.php?i=${encodeURIComponent(id)}`
+    );
+  }
 }
