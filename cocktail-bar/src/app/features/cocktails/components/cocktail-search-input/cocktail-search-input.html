@@ -27,14 +27,14 @@
       </mat-autocomplete>
     </div>
 
-    <div>
-      <mat-checkbox
-        [checked]="favouriteValue()"
-        labelPosition="before"
-        (change)="onFavouriteChange($event)"
-      >
+    <div class="fav-only-container">
+      @if(breakpoints.isTablet() || breakpoints.isDesktop()) {
         Favourites Only
-      </mat-checkbox>
+      }
+      <app-toggle-favourite-button
+        [isFavourite]="favouriteValue()"
+        (toggleFavourite)="onFavouriteChange()"
+      />
     </div>
   </div>
 

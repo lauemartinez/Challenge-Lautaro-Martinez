@@ -6,10 +6,8 @@
 
 #cocktail-list-section {
   grid-row: 3 / 5;
-  grid-column: 2 / 3;
 
   background-color: var(--mat-sys-primary-container);
-  border-radius: var(--mat-sys-corner-medium);
 
   display: grid;
   grid-template-columns: 1rem 1fr 1rem;
@@ -60,4 +58,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 840px) {
+  #cocktail-list-section {
+    grid-column: 2 / 3;
+    border-radius: var(--mat-sys-corner-medium);
+  }
+}
+@media (max-width: 839px) {
+  #cocktail-list-section {
+    grid-column: 1 / -1;
+  }
 }

@@ -4,10 +4,14 @@ import { FavouritesStore } from '../../../../shared/favourites.store';
 import { Cocktail } from '../../models/cocktail.model';
 import { EMPTY_COCKTAIL } from '../../models/cocktai-default.model';
 import { MATERIAL_IMPORTS } from '../../../../shared/material';
+import { ToggleFavouriteButton } from '../../components/toggle-favourite-button/toggle-favourite-button';
 
 @Component({
   selector: 'app-cocktail-details',
-  imports: [MATERIAL_IMPORTS],
+  imports: [
+    MATERIAL_IMPORTS, 
+    ToggleFavouriteButton
+  ],
   templateUrl: './cocktail-details.component.html',
   styleUrls: ['./cocktail-details.component.scss'],
 })
@@ -20,11 +24,6 @@ export class CocktailDetailsComponent {
   protected isFavourite = computed<boolean>(() => 
     this.favouritesStore.isFavourite(this.cocktail().id)
   );
-  protected favouriteStyles = computed<{color: string | undefined, icon: string}>(() => {
-    return this.isFavourite() ? 
-      {color: "primary", icon: 'favorite'} : 
-      {color: undefined, icon: 'favorite_border'};
-  });
 
   constructor() {
     this.cocktail.set(this.route.snapshot.data["cocktail"]);

@@ -1,0 +1,13 @@
+.mat-primary {
+  background-color: var(--mat-sys-primary);
+  .mat-icon {
+    color: var(--mat-sys-on-surface);
+  }
+}
+
+.mat-secondary {
+  background-color: var(--mat-sys-surface-variant);
+  .mat-icon {
+    color: var(--mat-sys-on-surface);
+  }
+}

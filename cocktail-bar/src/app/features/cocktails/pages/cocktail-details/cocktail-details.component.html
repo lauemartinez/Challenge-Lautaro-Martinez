@@ -1,4 +1,4 @@
-<section id="cocktail-details-section" class="cocktail-details-section">
+<section id="cocktail-details-section">
   <div class="details-panel"></div>
   <div class="details-content-wrapper">
     <h2 class="name-wrapper">
@@ -25,16 +25,13 @@
       mat-fab
       aria-label="Return to Home"
       (click)="returnHome()"
+      color="secondary"
     >
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <button 
-      mat-mini-fab
-      aria-label="Toggle Favourite"
-      (click)="toggleFavourite()"
-      [color]="favouriteStyles().color"
-    >
-      <mat-icon>{{ favouriteStyles().icon }}</mat-icon>
-    </button>
+    <app-toggle-favourite-button
+      [isFavourite]="isFavourite()"
+      (toggleFavourite)="toggleFavourite()"
+    />
   </div>
 </section>

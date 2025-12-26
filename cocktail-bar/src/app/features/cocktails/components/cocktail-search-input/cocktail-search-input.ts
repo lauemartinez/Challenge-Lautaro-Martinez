@@ -1,18 +1,26 @@
-import { Component, computed, effect, input, output, signal, untracked } from "@angular/core";
+import { Component, computed, effect, inject, input, output, signal, untracked } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MATERIAL_IMPORTS } from "../../../../shared/material";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { SearchFilter } from "../../models/search-field.model";
 import { SearchField } from "../../mappers/search-field.mapper";
+import { BreakpointService } from "../../../../shared/breakpoint.service";
+import { ToggleFavouriteButton } from "../toggle-favourite-button/toggle-favourite-button";
 
 @Component({
   selector: "app-cocktail-search-input",
   standalone: true,
-  imports: [CommonModule, MATERIAL_IMPORTS],
+  imports: [
+    CommonModule, 
+    ToggleFavouriteButton,
+    MATERIAL_IMPORTS
+  ],
   templateUrl: "./cocktail-search-input.html",
   styleUrl: "./cocktail-search-input.scss",
 })
 export class CocktailSearchInput {
+  protected readonly breakpoints = inject(BreakpointService);
+
   public filterFieldInput = input.required<SearchField>();
   public filterValueInput = input.required<string>();
   public favouriteValueInput = input.required<boolean>();
@@ -101,11 +109,11 @@ export class CocktailSearchInput {
     this.filterField.set(value);
   }
 
-  protected onFavouriteChange(event: MatCheckboxChange): void {
-    this.favouriteValue.set(event.checked);
+  protected onFavouriteChange(): void {
+    this.favouriteValue.update(v => !v);
     localStorage.setItem(
       this.STORAGE_FAVOURITE_FIELD_KEY,
-      event.checked.toString()
+      this.favouriteValue().toString()
     );
   }
 }

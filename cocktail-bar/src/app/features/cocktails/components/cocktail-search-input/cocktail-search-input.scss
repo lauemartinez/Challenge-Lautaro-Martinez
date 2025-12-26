@@ -56,3 +56,11 @@
 .full-width-input {
   width: 100%;
 }
+
+.fav-only-container {
+  display: flex;
+  font-size: 1.5rem;
+  gap: 0.5rem;
+  align-self: start;
+  align-items: center;
+}

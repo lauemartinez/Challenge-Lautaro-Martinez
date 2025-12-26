@@ -1,0 +1,9 @@
+<button 
+  class="favourtire-button"
+  mat-mini-fab
+  aria-label="Toggle Favourite"
+  (click)="toggleFavourite.emit()"
+  [color]="favouriteStyles().color"
+>
+  <mat-icon>{{ favouriteStyles().icon }}</mat-icon>
+</button>
