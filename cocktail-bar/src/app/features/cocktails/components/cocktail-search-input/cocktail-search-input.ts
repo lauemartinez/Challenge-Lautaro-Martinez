@@ -1,11 +1,11 @@
-import { Component, computed, effect, inject, input, output, signal, untracked } from "@angular/core";
+import { Component, computed, effect, inject, input, OnInit, output, signal, untracked } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MATERIAL_IMPORTS } from "../../../../shared/material";
-import { MatCheckboxChange } from "@angular/material/checkbox";
 import { SearchFilter } from "../../models/search-field.model";
 import { SearchField } from "../../mappers/search-field.mapper";
 import { BreakpointService } from "../../../../shared/breakpoint.service";
 import { ToggleFavouriteButton } from "../toggle-favourite-button/toggle-favourite-button";
+import { COCKTAIL_STORAGE_KEYS } from "../../../../shared/storage-keys";
 
 @Component({
   selector: "app-cocktail-search-input",
@@ -18,7 +18,7 @@ import { ToggleFavouriteButton } from "../toggle-favourite-button/toggle-favouri
   templateUrl: "./cocktail-search-input.html",
   styleUrl: "./cocktail-search-input.scss",
 })
-export class CocktailSearchInput {
+export class CocktailSearchInput implements OnInit {
   protected readonly breakpoints = inject(BreakpointService);
 
   public filterFieldInput = input.required<SearchField>();
@@ -49,10 +49,6 @@ export class CocktailSearchInput {
     { name: "ID", slug: "id" },
   ];
 
-  private readonly STORAGE_FILTER_VALUE_KEY = "cocktail-filter-value";
-  private readonly STORAGE_FILTER_FIELD_KEY = "cocktail-filter-field";
-  private readonly STORAGE_FAVOURITE_FIELD_KEY = "favourite-filter-field";
-
   constructor() {
     effect(() => {
       this.filterField.set(this.filterFieldInput());
@@ -79,25 +75,30 @@ export class CocktailSearchInput {
         value: this.filterValue(),
       };
 
-      localStorage.setItem(this.STORAGE_FILTER_VALUE_KEY, payload.value ?? "");
+      localStorage.setItem(COCKTAIL_STORAGE_KEYS.FILTER_VALUE, payload.value ?? "");
 
       this.filterChange.emit(payload);
     });
 
     effect(() => {
       localStorage.setItem(
-        this.STORAGE_FILTER_FIELD_KEY,
+        COCKTAIL_STORAGE_KEYS.FILTER_FIELD,
         this.filterField() ?? ""
       );
-
-      untracked(() => {
-        this.filterValueRaw.set("");
-      });
     });
 
     effect(() => {
       const newValue = this.favouriteValue();
       this.favouriteOnlyToggle.emit(newValue);
+    });
+  }
+
+  ngOnInit(): void {
+    untracked(() => {
+      this.favouriteValue.set(this.favouriteValueInput());
+      this.filterField.set(this.filterFieldInput());
+      this.filterValueRaw.set(this.filterValueInput());
+      this.filterValue.set(this.filterValueInput());
     });
   }
 
@@ -107,12 +108,16 @@ export class CocktailSearchInput {
 
   protected onFilterFieldChange(value: SearchField): void {
     this.filterField.set(value);
+    
+    untracked(() => {
+      this.filterValueRaw.set("");
+    });
   }
 
   protected onFavouriteChange(): void {
     this.favouriteValue.update(v => !v);
     localStorage.setItem(
-      this.STORAGE_FAVOURITE_FIELD_KEY,
+      COCKTAIL_STORAGE_KEYS.FAVOURITE_FIELD,
       this.favouriteValue().toString()
     );
   }

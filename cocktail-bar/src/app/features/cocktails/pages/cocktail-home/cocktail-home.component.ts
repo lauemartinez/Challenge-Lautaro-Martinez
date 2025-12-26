@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, inject, signal } from "@angular/core";
+import { Component, computed, inject, OnInit, signal } from "@angular/core";
 import { Cocktail } from "../../models/cocktail.model";
 import { ActivatedRoute } from "@angular/router";
 import { MATERIAL_IMPORTS } from "../../../../shared/material";
@@ -11,6 +11,7 @@ import { mapApiCocktailToApp } from "../../mappers/cocktail.mapper";
 import { SearchField } from "../../mappers/search-field.mapper";
 import { SearchFilter } from "../../models/search-field.model";
 import { FavouritesStore } from "../../../../shared/favourites.store";
+import { COCKTAIL_STORAGE_KEYS } from "../../../../shared/storage-keys";
 
 @Component({
   standalone: true,
@@ -19,7 +20,7 @@ import { FavouritesStore } from "../../../../shared/favourites.store";
   templateUrl: "./cocktail-home.component.html",
   styleUrl: "./cocktail-home.component.scss",
 })
-export class CocktailHomeComponent {
+export class CocktailHomeComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly searchService = inject(CocktailApiService);
   private readonly favouritesStore = inject(FavouritesStore);
@@ -27,6 +28,7 @@ export class CocktailHomeComponent {
   protected cocktailList = signal<Cocktail[]>([]);
   protected ingredientList = signal<string[]>([]);
   protected isLoading = signal<boolean>(false);
+
   protected filterFieldInput = signal<SearchField>("name");
   protected filterValueInput = signal<string>("");
   protected favouriteValueInput = signal<boolean>(false);
@@ -55,6 +57,17 @@ export class CocktailHomeComponent {
   constructor() {
     this.cocktailList.set(this.route.snapshot.data["cocktailList"]);
     this.ingredientList.set(this.route.snapshot.data["ingredientList"]);
+  }
+
+  ngOnInit(): void {
+    const filterField = localStorage.getItem(COCKTAIL_STORAGE_KEYS.FILTER_FIELD) as SearchField | null;
+    const filterValue = localStorage.getItem(COCKTAIL_STORAGE_KEYS.FILTER_VALUE);
+    const favouriteOnly = localStorage.getItem(COCKTAIL_STORAGE_KEYS.FAVOURITE_FIELD);
+
+    this.filterFieldInput.set(filterField ?? "name");
+    this.filterValueInput.set(filterValue ?? "");
+    this.favouriteValueInput.set(favouriteOnly === "true");
+    this.showOnlyFavourites.set(favouriteOnly === "true");
   }
 
   protected onFilterValueChange(payload: SearchFilter): void {
