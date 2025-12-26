@@ -11,7 +11,7 @@
 
   display: grid;
   grid-template-columns: 1rem 1fr 1rem;
-  grid-template-rows: 1rem auto auto 1rem;
+  grid-template-rows: 1rem min-content min-content 1rem;
   gap: 1rem;
 
   .cocktail-search-container {

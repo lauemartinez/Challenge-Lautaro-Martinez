@@ -6,7 +6,7 @@
   grid-template-columns:
     minmax(1rem, 1fr) min(80%, 70rem) minmax(1rem, 1fr);
   grid-template-rows: 
-    minmax(1rem, 0.5fr) 15rem 15rem auto minmax(1rem, 0.5fr);
+    minmax(1rem, 0.5fr) 15rem 15rem auto 0.5fr;
   gap: 1rem;
 }
 

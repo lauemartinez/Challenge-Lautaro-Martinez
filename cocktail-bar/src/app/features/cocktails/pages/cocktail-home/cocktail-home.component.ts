@@ -6,12 +6,13 @@ import { MATERIAL_IMPORTS } from "../../../../shared/material";
 import { CocktailCard } from "../../components/cocktail-card/cocktail-card";
 import { CocktailSearchInput } from "../../components/cocktail-search-input/cocktail-search-input";
 import { CocktailApiService } from "../../services/cocktail-api.service";
-import { map } from "rxjs";
+import { map, Observable } from "rxjs";
 import { mapApiCocktailToApp } from "../../mappers/cocktail.mapper";
 import { SearchField } from "../../mappers/search-field.mapper";
 import { SearchFilter } from "../../models/search-field.model";
 import { FavouritesStore } from "../../../../shared/favourites.store";
 import { COCKTAIL_STORAGE_KEYS } from "../../../../shared/storage-keys";
+import { CocktailApiResponse } from "../../models/cocktail-api.model";
 
 @Component({
   standalone: true,
@@ -70,11 +71,10 @@ export class CocktailHomeComponent implements OnInit {
     this.showOnlyFavourites.set(favouriteOnly === "true");
   }
 
-  protected onFilterValueChange(payload: SearchFilter): void {
+    protected onFilterValueChange(payload: SearchFilter): void {
     this.isLoading.set(true);
     if (!payload.value) {
-      this.cocktailList.set(this.route.snapshot.data["cocktailList"]);
-      this.isLoading.set(false);
+      this.getAllCocktails();
     } else {
       this.filterCocktails(payload);
     }
@@ -89,15 +89,26 @@ export class CocktailHomeComponent implements OnInit {
   }
 
   private filterCocktails(payload: SearchFilter): void {
-    this.searchService
-      .searchByField(payload.field, payload.value)
+    this.handleCocktailRequest(
+      this.searchService.searchByField(payload.field, payload.value)
+    );
+  }
+
+  private getAllCocktails(): void {
+    this.handleCocktailRequest(
+      this.searchService.searchByCategory('Cocktail')
+    );
+  }
+
+  private handleCocktailRequest(request$: Observable<CocktailApiResponse>): void {
+    this.isLoading.set(true);
+
+    request$
       .pipe(
-        map((res) =>
-          res.drinks && Array.isArray(res.drinks) ? res.drinks : []
-        ),
-        map((drinks) => drinks.map(mapApiCocktailToApp))
+        map(res => Array.isArray(res?.drinks) ? res.drinks : []),
+        map(drinks => drinks.map(mapApiCocktailToApp))
       )
-      .subscribe((cocktails) => {
+      .subscribe(cocktails => {
         this.cocktailList.set(cocktails);
         this.isLoading.set(false);
       });
