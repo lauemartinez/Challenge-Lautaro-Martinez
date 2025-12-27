@@ -20,6 +20,9 @@ import { COCKTAIL_STORAGE_KEYS } from "../../../../shared/storage-keys";
 })
 export class CocktailSearchInput implements OnInit {
   protected readonly breakpoints = inject(BreakpointService);
+  private initializedDict = {
+    filter: false, favourite: false,
+  };
 
   public filterFieldInput = input.required<SearchField>();
   public filterValueInput = input.required<string>();
@@ -77,7 +80,12 @@ export class CocktailSearchInput implements OnInit {
 
       localStorage.setItem(COCKTAIL_STORAGE_KEYS.FILTER_VALUE, payload.value ?? "");
 
-      this.filterChange.emit(payload);
+      if (!this.initializedDict.filter) {
+        this.initializedDict.filter = true;
+        return;
+      } else {
+        this.filterChange.emit(payload);
+      }
     });
 
     effect(() => {
@@ -89,7 +97,13 @@ export class CocktailSearchInput implements OnInit {
 
     effect(() => {
       const newValue = this.favouriteValue();
-      this.favouriteOnlyToggle.emit(newValue);
+
+      if (!this.initializedDict.favourite) {
+        this.initializedDict.favourite = true;
+        return;
+      } else {
+        this.favouriteOnlyToggle.emit(newValue);
+      }
     });
   }
 

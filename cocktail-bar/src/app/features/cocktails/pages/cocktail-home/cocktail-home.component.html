@@ -10,7 +10,12 @@
     ></app-cocktail-search-input>
   </div>
 
-  <div class="cocktail-cards-container">
+  <div 
+    class="cocktail-cards-container"
+    infinite-scroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="300"
+    (scrolled)="loadMore()">
     @if (!isLoading()) { @for (cocktail of visibleCocktails(); track cocktail.id) {
     <app-cocktail-card
       [cocktail]="cocktail"
