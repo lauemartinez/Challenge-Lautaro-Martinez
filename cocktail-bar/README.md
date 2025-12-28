@@ -1,59 +1,98 @@
-# CocktailBar
+# Cocktail Bar App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+Aplicación web desarrollada con **Angular 19** que consume la API pública de **TheCocktailDB** para listar, filtrar y visualizar detalles de cocktails.
 
-## Development server
+---
 
-To start a local development server, run:
+## Estructura del proyecto
 
+La aplicación sigue una estructura **feature-based**, priorizando escalabilidad y separación de responsabilidades:
+
+```
+src/app
+├── features
+│   └── cocktails
+│       ├── components
+│       ├── pages
+│       ├── services
+│       ├── models
+│       ├── mappers
+│       └── resolvers
+├── shared
+└── app.routes.ts
+```
+
+- **features/cocktails**: dominio principal de la app.
+- **components**: componentes reutilizables.
+- **pages**: vistas principales.
+- **services**: acceso a la API.
+- **mappers**: adaptación de modelos API → app.
+- **shared**: lógica transversal (Material, stores, constantes).
+
+---
+
+## Decisiones técnicas
+
+- **Angular 19 + Standalone Components**  
+  Reduce boilerplate y simplifica la arquitectura.
+
+- **Angular Signals**  
+  Manejo de estado local claro y predecible, sin sobrecargar RxJS.
+
+- **RxJS**  
+  Utilizado exclusivamente para flujos async (HTTP, pipes).
+
+- **Angular Material**  
+  UI consistente, accesible y productiva.
+
+- **Resolvers**  
+  Precarga de datos antes de renderizar vistas.
+
+- **Mapper Pattern**  
+  Desacopla el modelo de la API del modelo de la aplicación.
+
+- **Feature-based architecture**  
+  Facilita mantenimiento y escalabilidad.
+
+---
+
+## Ejecución del proyecto
+
+### Instalar dependencias
+```bash
+npm install
+```
+
+### Levantar la aplicación
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+Abrir en el navegador:
+```
+http://localhost:4200
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Testing
 
-## Building
+Se utilizan los tests generados por Angular (Unit Tests).
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
+### Ejecutar tests
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## Funcionalidades principales
 
-For end-to-end (e2e) testing, run:
+- Listado de cocktails
+- Filtro por nombre, id e ingredientes
+- Vista de detalle
+- Gestión de favoritos
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Notas finales
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+El proyecto prioriza **claridad, mantenibilidad y buenas prácticas**, evitando complejidad innecesaria y siguiendo estándares actuales de Angular.
