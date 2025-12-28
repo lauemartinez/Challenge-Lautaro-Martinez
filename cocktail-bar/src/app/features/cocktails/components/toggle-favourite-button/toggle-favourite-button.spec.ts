@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ToggleFavouriteButton } from './toggle-favourite-button';
 
 describe('ToggleFavouriteButton', () => {
@@ -8,13 +7,15 @@ describe('ToggleFavouriteButton', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ToggleFavouriteButton]
-    })
-    .compileComponents();
+      imports: [ToggleFavouriteButton],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ToggleFavouriteButton);
+
+    fixture.componentRef.setInput('isFavourite', false);
+
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -8,13 +8,22 @@ describe('CocktailCard', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CocktailCard]
-    })
-    .compileComponents();
+      imports: [CocktailCard],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CocktailCard);
+
+    fixture.componentRef.setInput('cocktail', {
+      id: '1',
+      name: 'Test cocktail',
+      image: '',
+      ingredients: [],
+      instructions: '',
+      isFavourite: false,
+    });
+
+    fixture.detectChanges();
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
   it('should create', () => {

@@ -8,11 +8,17 @@ describe('CocktailSearchInput', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CocktailSearchInput]
-    })
-    .compileComponents();
+      imports: [CocktailSearchInput],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CocktailSearchInput);
+
+    fixture.componentRef.setInput('filterFieldInput', 'name');
+    fixture.componentRef.setInput('filterValueInput', '');
+    fixture.componentRef.setInput('favouriteValueInput', false);
+    fixture.componentRef.setInput('ingredientListInput', []);
+
+    fixture.detectChanges();
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
