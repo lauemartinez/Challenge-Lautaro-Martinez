@@ -10,6 +10,7 @@
           [value]="filterField()"
           (input)="onFilterFieldChange($any($event.target).value)"
           [matAutocomplete]="fields"
+          aria-label="Filter Field Input"
         />
 
         <mat-icon fontIcon="keyboard_arrow_down"></mat-icon>

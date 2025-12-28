@@ -1,12 +1,12 @@
 <div class="card-wrapper">
-  <img src="{{ cocktail().thumbnail }}" alt="{{ cocktail().name }}">
+  <img [src]="cocktail().thumbnail" [alt]="cocktail().name">
   <div class="image-shadow"></div>
   @if (cocktail().isFavourite) {
     <mat-icon class="highlight-background" color="primary">favorite</mat-icon>
   }
   <div class="cocktail-info">
     <span class="cocktail-name">{{ cocktail().name }}</span>
-    <button class="cocktail-menu-button" matButton [matMenuTriggerFor]="menu">
+    <button class="cocktail-menu-button" matButton [matMenuTriggerFor]="menu" aria-label="Open cocktail menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu" xPosition="before" yPosition="below">

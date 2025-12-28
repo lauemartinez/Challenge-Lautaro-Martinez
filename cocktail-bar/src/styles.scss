@@ -9,6 +9,8 @@ html {
     typography: Roboto,
     density: 0,
   ));
+
+  font-size: clamp(14px, 1.2vw, 16px);
 }
 
 body {

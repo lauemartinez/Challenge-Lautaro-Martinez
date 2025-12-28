@@ -91,7 +91,6 @@ export class CocktailHomeComponent implements OnInit {
 
   protected onFilterValueChange(payload: SearchFilter): void {
     this.isLoading.set(true);
-    console.log('onFilterValueChange');
     this.visibleCount.set(this.PAGE_SIZE);
     if (!payload.value) {
       this.getAllCocktails();
@@ -102,7 +101,6 @@ export class CocktailHomeComponent implements OnInit {
 
   protected onFavouriteOnlyToggle(favouriteOnly: boolean): void {
     this.showOnlyFavourites.set(favouriteOnly);
-    console.log('onFavouriteOnlyToggle');
     this.visibleCount.set(this.PAGE_SIZE);
   }
 
